@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "deepthink-mcp": {
+      "command": "node",
+      "args": ["src/server.js"],
+      "cwd": "/Users/haziqazizi/code/deepthink-mcp",
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "GOOGLE_API_KEY": "${GOOGLE_API_KEY}",
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+        "NODE_ENV": "production",
+        "LOG_LEVEL": "info",
+        "CONFIG_PATH": "config/models.yaml"
+      }
+    }
+  }
+}

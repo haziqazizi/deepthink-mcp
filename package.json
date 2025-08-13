@@ -1,0 +1,55 @@
+{
+  "name": "deepthink-mcp",
+  "version": "1.0.0",
+  "description": "DeepThink MCP Server - Route queries to specific AI models like O3",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "build": "echo 'No build step required for Node.js'",
+    "test": "cross-env NODE_OPTIONS=\"--experimental-vm-modules\" jest",
+    "test:unit": "cross-env NODE_OPTIONS=\"--experimental-vm-modules\" jest tests/unit/",
+    "test:integration": "cross-env NODE_OPTIONS=\"--experimental-vm-modules\" jest tests/integration/",
+    "test:load": "cross-env NODE_OPTIONS=\"--experimental-vm-modules\" jest tests/load/",
+    "test:coverage": "cross-env NODE_OPTIONS=\"--experimental-vm-modules\" jest --coverage",
+    "test:watch": "cross-env NODE_OPTIONS=\"--experimental-vm-modules\" jest --watch",
+    "lint": "eslint src/ --ext .js",
+    "format": "prettier --write src/"
+  },
+  "keywords": [
+    "mcp",
+    "ai",
+    "openai",
+    "o3",
+    "deepthink",
+    "model-context-protocol"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "openai": "^4.0.0",
+    "@anthropic-ai/sdk": "^0.30.0",
+    "@google/generative-ai": "^0.19.0",
+    "zod": "^3.22.0",
+    "js-yaml": "^4.1.0",
+    "winston": "^3.11.0",
+
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "@types/node": "^20.0.0",
+    "jest": "^29.7.0",
+    "@jest/globals": "^29.7.0",
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "babel-jest": "^29.7.0",
+    "cross-env": "^7.0.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

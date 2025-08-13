@@ -1,0 +1,204 @@
+# DeepThink MCP Model Configuration
+version: "1.0"
+
+# Model definitions
+models:
+  o3:
+    provider: openai
+    model_name: "o3"
+    name: "OpenAI O3"
+    enabled: false  # Disabled - using o3-pro only
+    capabilities: ["reasoning", "coding", "analysis", "math"]
+    cost_per_1k_tokens: 0.060
+    default_params:
+      temperature: 0.1
+      max_tokens: 4000
+    rate_limit:
+      requests_per_minute: 50
+      requests_per_day: 1000
+    timeout_ms: 60000
+
+  o3-pro:
+    provider: openai
+    model_name: "o3-pro"
+    name: "OpenAI O3 Pro"
+    capabilities: ["reasoning", "coding", "analysis", "math", "research"]
+    cost_per_1k_tokens: 0.200
+    default_params:
+      temperature: 0.05
+      max_tokens: 8000
+    rate_limit:
+      requests_per_minute: 20
+      requests_per_day: 200
+    timeout_ms: 120000
+
+  o3-mini:
+    provider: openai
+    model_name: "o3-mini"
+    name: "OpenAI O3 Mini"
+    enabled: false  # Disabled - using o3-pro only
+    capabilities: ["reasoning", "coding", "analysis", "math"]
+    cost_per_1k_tokens: 0.020
+    default_params:
+      temperature: 0.1
+      max_tokens: 4000
+    rate_limit:
+      requests_per_minute: 100
+      requests_per_day: 2000
+    timeout_ms: 30000
+
+  gemini-pro:
+    provider: google
+    model_name: "gemini-pro"
+    name: "Google Gemini Pro"
+    enabled: false  # Disabled - using o3-pro only
+    capabilities: ["reasoning", "coding", "analysis", "creative", "multimodal"]
+    cost_per_1k_tokens: 0.025
+    default_params:
+      temperature: 0.2
+      maxOutputTokens: 4000
+    rate_limit:
+      requests_per_minute: 100
+      requests_per_day: 2000
+    timeout_ms: 30000
+
+  gemini-1.5-pro:
+    provider: google
+    model_name: "gemini-1.5-pro"
+    name: "Google Gemini 1.5 Pro"
+    enabled: false  # Disabled - using o3-pro only
+    capabilities: ["reasoning", "coding", "analysis", "creative", "multimodal"]
+    cost_per_1k_tokens: 0.035
+    default_params:
+      temperature: 0.2
+      maxOutputTokens: 8000
+    rate_limit:
+      requests_per_minute: 80
+      requests_per_day: 1500
+    timeout_ms: 60000
+
+  claude-3-5-sonnet:
+    provider: anthropic
+    model_name: "claude-3-5-sonnet-latest"
+    name: "Claude 3.5 Sonnet"
+    enabled: false  # Disabled - using o3-pro only
+    capabilities: ["reasoning", "coding", "analysis", "creative", "writing"]
+    cost_per_1k_tokens: 0.015
+    default_params:
+      temperature: 0.3
+      max_tokens: 4000
+    rate_limit:
+      requests_per_minute: 80
+      requests_per_day: 1500
+    timeout_ms: 30000
+
+  gpt-4:
+    provider: openai
+    model_name: "gpt-4"
+    name: "GPT-4"
+    enabled: false  # Disabled - using o3-pro only
+    capabilities: ["reasoning", "coding", "analysis", "creative", "writing"]
+    cost_per_1k_tokens: 0.030
+    default_params:
+      temperature: 0.3
+      max_tokens: 4000
+    rate_limit:
+      requests_per_minute: 60
+      requests_per_day: 1200
+    timeout_ms: 30000
+
+  gpt-4-turbo:
+    provider: openai
+    model_name: "gpt-4-turbo"
+    name: "GPT-4 Turbo"
+    enabled: false  # Disabled - using o3-pro only
+    capabilities: ["reasoning", "coding", "analysis", "creative", "writing", "multimodal"]
+    cost_per_1k_tokens: 0.020
+    default_params:
+      temperature: 0.3
+      max_tokens: 4000
+    rate_limit:
+      requests_per_minute: 80
+      requests_per_day: 1500
+    timeout_ms: 30000
+
+# Global settings
+settings:
+  # Default model when no specific model is requested
+  default_model: "o3-pro"
+  
+  # Fallback model if primary model fails (none - o3-pro only)
+  fallback_model: "o3-pro"
+  
+  # Models available for auto-selection (o3-pro only)
+  available_models:
+    - "o3-pro"
+  
+  # Global limits and settings
+  max_retries: 3
+  timeout_ms: 30000
+  cache_ttl: 300
+  
+  # Budget controls
+  budget_limits:
+    daily_cost_limit: 10.00
+    weekly_cost_limit: 50.00
+    monthly_cost_limit: 200.00
+    
+  # Global rate limiting (applied per client)
+  rate_limits:
+    global_requests_per_minute: 200
+    per_user_requests_per_minute: 50
+    burst_limit: 10
+    
+  # Model selection preferences
+  selection_preferences:
+    # Prioritize speed for simple queries
+    speed_threshold_words: 10
+    
+    # Use reasoning models for complex queries
+    reasoning_keywords:
+      - "analyze"
+      - "explain"
+      - "solve"
+      - "complex"
+      - "difficult"
+      - "reasoning"
+      
+    # Use multimodal models when images mentioned
+    multimodal_keywords:
+      - "image"
+      - "picture"
+      - "visual"
+      - "diagram"
+      
+    # Cost optimization settings
+    cost_optimize: true
+    cost_weight: 0.3
+    
+    # Quality vs speed balance (0.0 = speed, 1.0 = quality)
+    quality_speed_balance: 0.7
+
+# Environment-specific overrides
+environments:
+  development:
+    budget_limits:
+      daily_cost_limit: 1.00
+    rate_limits:
+      per_user_requests_per_minute: 20
+    logging_level: "debug"
+    
+  production:
+    budget_limits:
+      daily_cost_limit: 50.00
+    rate_limits:
+      per_user_requests_per_minute: 100
+    logging_level: "info"
+    
+  testing:
+    default_model: "o3-mini"
+    fallback_model: "gpt-4"
+    budget_limits:
+      daily_cost_limit: 0.50
+    rate_limits:
+      per_user_requests_per_minute: 10
