@@ -115,7 +115,7 @@ export class ModelSelector {
     }
 
     let bestScore = -1;
-    let bestModel = this.config.default_model || 'o3';
+    let bestModel = this.config.default_model || 'o3-pro';
 
     for (const [modelId, capabilities] of Object.entries(this.modelCapabilities)) {
       // Skip unavailable models

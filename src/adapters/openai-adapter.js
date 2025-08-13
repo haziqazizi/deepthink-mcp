@@ -15,7 +15,7 @@ export class OpenAIAdapter extends BaseAdapter {
     
     this.client = new OpenAI({
       apiKey: apiKey,
-      timeout: config.timeout_ms || 30000,
+      timeout: config.timeout_ms || 1800000,
     });
     
     // Default parameters from config

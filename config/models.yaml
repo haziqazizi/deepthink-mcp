@@ -30,7 +30,7 @@ models:
     rate_limit:
       requests_per_minute: 20
       requests_per_day: 200
-    timeout_ms: 120000
+    timeout_ms: 1800000
 
   o3-mini:
     provider: openai

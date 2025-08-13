@@ -146,7 +146,7 @@ export class BaseAdapter {
 
     // Handle common API key issues
     if (status === 401 || message.includes('invalid_api_key') || message.includes('Incorrect API key') || message.includes('authentication')) {
-      return '🔑 Invalid OpenAI API key. Please check your API key in the .env file:\n\n1. Make sure OPENAI_API_KEY is set correctly\n2. Verify your key at https://platform.openai.com/api-keys\n3. Restart Claude Code after updating the key';
+      return '🔑 Invalid OpenAI API key. Please update your MCP configuration:\n\n1. Remove the server: claude mcp remove deepthink-mcp\n2. Add with valid API key: claude mcp add deepthink-mcp --scope user --env OPENAI_API_KEY=sk-your-valid-key -- node /Users/haziqazizi/code/deepthink-mcp/src/server.js\n3. Get a valid key from: https://platform.openai.com/api-keys';
     }
     
     if (message.includes('insufficient_quota') || message.includes('exceeded your current quota')) {
