@@ -173,33 +173,22 @@ function getDefaultConfig() {
   
   return {
     models: {
-      'o3': {
+      'o3-pro': {
         provider: 'openai',
-        model_name: 'o3',
-        name: 'OpenAI O3',
+        model_name: 'o3-pro',
+        name: 'OpenAI O3 Pro',
         capabilities: ['reasoning', 'coding', 'analysis', 'math'],
         cost_per_1k_tokens: 0.060,
         default_params: {
-          temperature: 0.1,
-          max_tokens: 4000
-        }
-      },
-      'claude-3-5-sonnet': {
-        provider: 'anthropic',
-        model_name: 'claude-3-5-sonnet-latest',
-        name: 'Claude 3.5 Sonnet',
-        capabilities: ['reasoning', 'coding', 'analysis', 'creative'],
-        cost_per_1k_tokens: 0.015,
-        default_params: {
-          temperature: 0.3,
-          max_tokens: 4000
+          temperature: null,
+          max_tokens: 100000
         }
       }
     },
     settings: {
-      default_model: 'o3',
-      fallback_model: 'claude-3-5-sonnet',
-      available_models: ['o3', 'claude-3-5-sonnet'],
+      default_model: 'o3-pro',
+      fallback_model: null,
+      available_models: ['o3-pro'],
       budget_limits: {
         daily_cost_limit: 10.00
       },

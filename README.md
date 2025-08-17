@@ -168,11 +168,11 @@ claude mcp list
 deepthink-mcp/
 ├── src/
 │   ├── server.js          # Main MCP server
-│   ├── router/            # Query routing logic
-│   ├── adapters/          # AI model integrations
+│   ├── o3-service.js      # Direct O3-Pro service
+│   ├── adapters/          # OpenAI integration
 │   └── utils/             # Utilities and logging
 ├── config/
-│   └── models.yaml        # Model configuration
+│   └── models.yaml        # O3-Pro configuration
 ├── setup.js               # Interactive setup script
 ├── test-isolated.js       # Validation tests
 └── INTEGRATION.md         # Detailed integration guide
